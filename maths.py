@@ -1,3 +1,17 @@
+OPTIONS = "G\tGCD\nC\tCoprime\nT\tEuler's Totient\nB\tBezout Coefficients\nI\tMultiplicative Inverse"
+
+def inverse(a, b):
+    gcdVal, x, y = bezout(a,b)
+    if gcdVal != 1:
+        print(f'gcd({a},{b}) is not 1...\nThere is no multiplicative inverse')
+        return None
+    else:
+        if x <0:
+            return b+x
+        return x
+
+        
+
 def bezout(a, b):
     if a == 0:
         return b, 0, 1
@@ -30,7 +44,7 @@ def gcd(a,b, printmode):
     return b
 
 if __name__ == '__main__':
-    inp = str(input("G\tGCD\nC\tCoprime\nT\tEuler's Totient\nB\tBezout Coefficients\n~ ")).lower()
+    inp = str(input(f'{OPTIONS}\n~ ')).lower()
     if inp == 'g':
         a = int(input("What's the first number? "))
         b = int(input("What's the second number? ")) 
@@ -50,3 +64,10 @@ if __name__ == '__main__':
         b = int(input("What's the second number? "))
         gcdVal, x, y = bezout(a,b) 
         print(f'gcd({a},{b})\n\t= {gcdVal}\n\t= {a}*{x} + {b}*{y}')
+    if inp == 'i':
+        a = int(input('Find the inverse of: '))
+        b = int(input('Modulo: '))
+        inverseVal = inverse(a, b)
+        if inverseVal:
+            print(f'The multiplicative inverse is {inverseVal}')
+
