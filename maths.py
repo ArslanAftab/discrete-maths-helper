@@ -1,3 +1,9 @@
+def bezout(a, b):
+    if a == 0:
+        return b, 0, 1
+    else:
+        gcdVal, x, y = bezout(b % a, a)
+        return gcdVal, y - (b // a) * x, x 
 
 def totient(a):
     count =0
@@ -24,7 +30,7 @@ def gcd(a,b, printmode):
     return b
 
 if __name__ == '__main__':
-    inp = str(input("G\tGCD\nC\tCoprime\nT\tEuler's Totient\n~ ")).lower()
+    inp = str(input("G\tGCD\nC\tCoprime\nT\tEuler's Totient\nB\tBezout Coefficients\n~ ")).lower()
     if inp == 'g':
         a = int(input("What's the first number? "))
         b = int(input("What's the second number? ")) 
@@ -39,3 +45,8 @@ if __name__ == '__main__':
     if inp == 't':
         a = int(input("What's the number? "))
         print(f'The totient of {a} is {totient(a)}')
+    if inp == 'b':
+        a = int(input("What's the first number? "))
+        b = int(input("What's the second number? "))
+        gcdVal, x, y = bezout(a,b) 
+        print(f'gcd({a},{b})\n\t= {gcdVal}\n\t= {a}*{x} + {b}*{y}')
